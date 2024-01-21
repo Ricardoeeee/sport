@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>酷炫智能大屏数据中心</title>
+    <!--大屏-->
+    <link type="text/css" href="./css/public.css" rel="stylesheet">
+    <link type="text/css" href="./css/icon.css" rel="stylesheet">
+    <link type="text/css" href="./css/index.css" rel="stylesheet">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 768 * 100 + 'px';
+    </script>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/jquery-3.7.0.min.js" type="text/javascript"></script>
+    <script src="./js/jquery.numscroll.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div class="bg">
+    <div class="title">运动大屏数据中心</div>
+    <div class="leftMain">
+        <div class="leftMain_top">
+            <div class="leftMain_topIn">
+                <ul>
+                    <li>
+                        <div class="liIn">
+                            <h3>球类运动</h3>
+                            <p class="shu"><span class="shu1">6890.69</span><i>万元</i></p>
+                            <!--                            <div class="zi"><span class="span1">小标题：文字</span><span>小标题：文字</span></div>-->
+                            <span class="border_bg_leftTop"></span>
+                            <span class="border_bg_rightTop"></span>
+                            <span class="border_bg_leftBottom"></span>
+                            <span class="border_bg_rightBottom"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="liIn">
+                            <h3>无氧运动</h3>
+                            <p class="shu"><span class="shu2">3058.99</span><i>万元</i></p>
+                            <!--                            <div class="zi"><span class="span1">小标题：文字</span><span>小标题：文字</span></div>-->
+                            <span class="border_bg_leftTop"></span>
+                            <span class="border_bg_rightTop"></span>
+                            <span class="border_bg_leftBottom"></span>
+                            <span class="border_bg_rightBottom"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="liIn">
+                            <h3>有氧运动</h3>
+                            <p class="shu"><span class="shu3">5032.39</span><i>万元</i></p>
+                            <!--                            <div class="zi"><span class="span1">小标题：文字</span><span>小标题：文字</span></div>-->
+                            <span class="border_bg_leftTop"></span>
+                            <span class="border_bg_rightTop"></span>
+                            <span class="border_bg_leftBottom"></span>
+                            <span class="border_bg_rightBottom"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="liIn">
+                            <h3>户外运动</h3>
+                            <p class="shu"><span class="shu4">7590.15</span><i>万元</i></p>
+                            <!--                            <div class="zi"><span class="span1">小标题：文字</span><span>小标题：文字</span></div>-->
+                            <span class="border_bg_leftTop"></span>
+                            <span class="border_bg_rightTop"></span>
+                            <span class="border_bg_leftBottom"></span>
+                            <span class="border_bg_rightBottom"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="leftMain_middle">
+            <div class="leftMain_middle_left">
+                <div class="leftMain_middle_leftIn">
+                    <h3>各个年龄段的运动人数</h3>
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div class="biaoge" style="width:100%; height:25vh" id="chartmain"></div>
+                    <script type="text/javascript">
+
+                        //window.onload = function () {
+                        //指定图表的配置项和数据
+                        $(function () {
+                            $.get({
+                                url: "http://localhost:8091/stu/selectbyage",
+                                xhrFields: {withCredentials: true},
+                                crossDomain: true,
+                                data: null,
+                                dataType: "json"
+                            }).done(function (a) {
+                                console.log(a)
+                                var dataAxis = a.年龄段;
+                                var data = a.人数;
+                                var yMax = 20;
+                                var dataShadow = [];
+
+                                for (var i = 0; i < data.length; i++) {
+                                    dataShadow.push(yMax);
+                                }
+
+                                option = {
+                                    title: {
+                                        text: '',
+                                        subtext: ''
+                                    },
+                                    grid: {
+                                        x: 40,
+                                        y: 40,
+                                        x2: 20,
+                                        y2: 20,
+
+                                    },
+                                    xAxis: {
+                                        data: dataAxis,
+                                        axisLabel: {
+                                            /*inside: true,*/
+                                            interval: 0,
+                                            textStyle: {
+                                                color: '#fff',
+                                                fontSize: 12
+
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: false,
+                                        },
+                                        axisLine: {
+                                            show: true,
+                                            symbol: ['none', 'arrow'],
+                                            symbolOffset: 12,
+                                            lineStyle: {
+                                                color: '#fff',
+                                            }
+                                        },
+                                        z: 10
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        name: '单位：人',
+                                        axisLine: {
+                                            show: true,
+                                            symbol: ['none', 'arrow'],
+                                            symbolOffset: 12,
+                                            lineStyle: {
+                                                color: '#fff',
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: false
+                                        },
+                                        axisLabel: {
+                                            textStyle: {
+                                                color: '#fff',
+                                                fontSize: 12
+                                            }
+                                        }
+                                    },
+
+                                    dataZoom: [
+                                        {
+                                            type: 'inside'
+                                        }
+                                    ],
+                                    series: [
+                                        { // For shadow
+                                            type: 'bar',
+                                            itemStyle: {
+                                                color: 'rgba(0,0,0,0.05)'
+                                            },
+                                            barGap: '-100%',
+                                            barCategoryGap: '40%',
+                                            data: dataShadow,
+                                            animation: false
+                                        },
+                                        {
+                                            type: 'bar',
+                                            itemStyle: {
+                                                color: new echarts.graphic.LinearGradient(
+                                                    0, 0, 0, 1,
+                                                    [
+                                                        {offset: 0, color: '#0efdff'},
+                                                        {offset: 0.5, color: '#188df0'},
+                                                        {offset: 1, color: '#188df0'}
+                                                    ]
+                                                )
+                                            },
+                                            emphasis: {
+                                                itemStyle: {
+                                                    color: new echarts.graphic.LinearGradient(
+                                                        0, 0, 0, 1,
+                                                        [
+                                                            {offset: 0, color: '#2378f7'},
+                                                            {offset: 0.7, color: '#2378f7'},
+                                                            {offset: 1, color: '#0efdff'}
+                                                        ]
+                                                    )
+                                                }
+                                            },
+                                            data: data
+                                        }
+                                    ]
+                                };
+
+                                // Enable data zoom when user click bar.
+                                /*var zoomSize = 6;
+                myChart.on('click', function (params) {
+                  console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+                  myChart.dispatchAction({
+                    type: 'dataZoom',
+                    startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                    endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+                  });
+                });*/
+
+                                //获取dom容器
+                                var myChart = echarts.init(document.getElementById('chartmain'));
+                                // 使用刚指定的配置项和数据显示图表。
+                                myChart.setOption(option);
+                                //};
+                            }).fail(function () {
+                                console.log("12321323123")
+                            },)
+                        })
+
+                    </script>
+                    <span class="border_bg_leftTop"></span>
+                    <span class="border_bg_rightTop"></span>
+                    <span class="border_bg_leftBottom"></span>
+                    <span class="border_bg_rightBottom"></span>
+                </div>
+            </div>
+            <div class="leftMain_middle_right">
+                <div class="leftMain_middle_rightIn">
+                    <h3>热门运动</h3>
+                    <div class="biaoge biaoge_pai" style="width:100%; height:25vh">
+                        <div class="biaoge_paiIn">
+                            <ul>
+                                <li>
+                                    <div class="liIn">
+                                        <div class="liIn_left"><span class="bot"></span><span class="zi">球类运动</span>
+                                        </div>
+                                        <div class="liIn_line">
+                                            <div class="line_lineIn" style="width:62%;"></div>
+                                        </div>
+                                        <p class="num">31%</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="liIn liIn2">
+                                        <div class="liIn_left"><span class="bot"></span><span class="zi">有氧运动</span>
+                                        </div>
+                                        <div class="liIn_line">
+                                            <div class="line_lineIn" style="width:54%;"></div>
+                                        </div>
+                                        <p class="num">27%</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="liIn liIn3">
+                                        <div class="liIn_left"><span class="bot"></span><span class="zi">无氧运动</span>
+                                        </div>
+                                        <div class="liIn_line">
+                                            <div class="line_lineIn" style="width:52%;"></div>
+                                        </div>
+                                        <p class="num">26%</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="liIn liIn4">
+                                        <div class="liIn_left"><span class="bot"></span><span class="zi">户外运动</span>
+                                        </div>
+                                        <div class="liIn_line">
+                                            <div class="line_lineIn" style="width:32%;"></div>
+                                        </div>
+                                        <p class="num">16%</p>
+                                    </div>
+                                </li>
+                                <!--                                <li>-->
+                                <!--                                    <div class="liIn liIn5">-->
+                                <!--                                        <div class="liIn_left"><span class="bot"></span><span class="zi">登山</span></div>-->
+                                <!--                                        <div class="liIn_line"><div class="line_lineIn" style="width:31.4%;"></div></div>-->
+                                <!--                                        <p class="num">15.2%</p>-->
+                                <!--                                    </div>-->
+                                <!--                                </li>-->
+                                <!--                                <li>-->
+                                <!--                                    <div class="liIn liIn6">-->
+                                <!--                                        <div class="liIn_left"><span class="bot"></span><span class="zi">第六名</span></div>-->
+                                <!--                                        <div class="liIn_line"><div class="line_lineIn" style="width:10.5%;"></div></div>-->
+                                <!--                                        <p class="num">10.5%</p>-->
+                                <!--                                    </div>-->
+                                <!--                                </li>-->
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="border_bg_leftTop"></span>
+                    <span class="border_bg_rightTop"></span>
+                    <span class="border_bg_leftBottom"></span>
+                    <span class="border_bg_rightBottom"></span>
+                </div>
+            </div>
+        </div>
+        <div class="leftMain_middle">
+            <div class="leftMain_middle_left">
+                <div class="leftMain_middle_leftIn">
+                    <h3>男女生各时间段的运动时长</h3>
+                    <div class="biaoge" style="width:100%; height:25vh" id="chartmain_zhe"></div>
+                    <script type="text/javascript">
+                        //window.onload = function (){
+                        //指定图表的配置项和数据
+                        $(function () {
+                            $.get({
+                                url: "http://localhost:8091/stu/selectbytime",
+                                xhrFields: {withCredentials: true},
+                                crossDomain: true,
+                                data: null,
+                                dataType: "json"
+                            }).done(function (a) {
+                                console.log(a)
+
+                                option = {
+                                    title: {
+                                        text: ''
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis'
+                                    },
+                                    legend: {
+                                        textStyle: {
+                                            color: '#fff',
+                                            fontSize: 12,
+                                        },
+                                        right: '10%',
+                                        data: ['男生', '女生']
+                                    },
+                                    grid: {
+                                        x: 40,
+                                        y: 40,
+                                        x2: 40,
+                                        y2: 40,
+                                    },
+                                    toolbox: {
+                                        feature: {
+                                            //saveAsImage: {}
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        boundaryGap: false,
+                                        axisLabel: {
+                                            /*inside: true,*/
+                                            interval: 0,
+                                            textStyle: {
+                                                color: '#fff',
+                                                fontSize: 12
+
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: false,
+                                        },
+                                        axisLine: {
+                                            show: true,
+                                            symbol: ['none', 'arrow'],
+                                            symbolOffset: 12,
+                                            lineStyle: {
+                                                color: '#fff',
+                                            }
+                                        },
+                                        data: a.运动时间
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        name: '单位：分钟',
+
+                                        axisLine: {
+                                            show: true,
+                                            symbol: ['none', 'arrow'],
+                                            symbolOffset: 12,
+                                            lineStyle: {
+                                                color: '#fff',
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: false
+                                        },
+                                        axisLabel: {
+                                            textStyle: {
+                                                color: '#fff',
+                                                fontSize: 12
+                                            }
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            name: '男生',
+                                            type: 'line',
+                                            stack: '总量',
+                                            data: a.男运动时长,
+                                            itemStyle: {
+                                                normal: {
+                                                    color: "#0efdff",//折线点的颜色
+                                                    lineStyle: {
+                                                        color: "#0efdff",//折线的颜色
+                                                        width: 2,
+                                                    }
+                                                },
+                                            }
+                                        },
+                                        {
+                                            name: '女生',
+                                            type: 'line',
+                                            stack: '总量',
+                                            data: a.女运动时长,
+                                        },
+                                    ]
+                                };
+                                //获取dom容器
+                                var myChart = echarts.init(document.getElementById('chartmain_zhe'));
+                                // 使用刚指定的配置项和数据显示图表。
+                                myChart.setOption(option);
+                                //};
+                            })
+                        })
+
+
+                    </script>
+                    <span class="border_bg_leftTop"></span>
+                    <span class="border_bg_rightTop"></span>
+                    <span class="border_bg_leftBottom"></span>
+                    <span class="border_bg_rightBottom"></span>
+                </div>
+            </div>
+            <div class="leftMain_middle_right">
+                <div class="leftMain_middle_rightIn">
+                    <h3>数据统计</h3>
+                    <div class="biaoge biaoge_bi" style="width:100%; height:25vh">
+                        <ul>
+                            <li>
+                                <div class="liIn">
+                                    <p class="shu shu1">100</p>
+                                    <p class="zi">总人数</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="liIn">
+                                    <p class="shu shu2">53</p>
+                                    <p class="zi">男生</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="liIn">
+                                    <p class="shu shu3">47</p>
+                                    <p class="zi">女生</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="liIn">
+                                    <p class="shu shu4">25</p>
+                                    <p class="zi">总运动数</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="liIn">
+                                    <p class="shu shu5">10</p>
+                                    <p class="zi">热门运动</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="liIn">
+                                    <p class="shu shu6">5</p>
+                                    <p class="zi">户外运动</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <span class="border_bg_leftTop"></span>
+                    <span class="border_bg_rightTop"></span>
+                    <span class="border_bg_leftBottom"></span>
+                    <span class="border_bg_rightBottom"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rightMain">
+        <div class="rightMain_top">
+            <div class="rightMain_topIn">
+                <h3>各个运动占比</h3>
+                <div class="biaoge" style="width:100%; height:30vh" id="chartmain_bing"></div>
+                <script type="text/javascript">
+
+                    $(function () {
+                        $.get({
+                            url: "http://localhost:8091/stu/SelectSportStu",
+                            xhrFields: {withCredentials: true},
+                            crossDomain: true,
+                            data: null,
+                            dataType: "json"
+                        }).done(function (a) {
+                            console.log(a)
+                            var aa = []
+                            for (var i = 0; i < a.运动人数.length; i++) {
+                                aa.push({"name": a.运动类型[i], "value": a.运动人数[i]})
+                            }
+                            console.log(aa)
+                            option = {
+                                title: {
+                                    text: '数据情况统计',
+                                    subtext: '',
+                                    left: 'right',
+                                    textStyle: {
+                                        color: '#fff',
+                                        fontSize: 12
+                                    }
+                                },
+                                tooltip: {
+                                    trigger: 'item',
+                                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                                },
+                                legend: {
+                                    // orient: 'vertical',
+                                    // top: 'middle',
+                                    type: 'scroll',
+                                    orient: 'vertical',
+                                    right: 10,
+                                    top: 40,
+                                    bottom: 20,
+                                    left: 'right',
+                                    data: aa,
+                                    textStyle: {
+                                        color: '#fff',
+                                        fontSize: 12
+                                    }
+
+                                },
+                                grid: {
+                                    x: '-10%',
+                                    y: 40,
+                                    x2: 20,
+                                    y2: 20,
+                                },
+                                color: ['#09d0fb', '#f88cfb', '#95f8fe', '#f9f390'],
+                                series: [
+                                    {
+                                        type: 'pie',
+                                        radius: '65%',
+                                        center: ['50%', '50%'],
+                                        selectedMode: 'single',
+                                        data: aa,
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                            //获取dom容器
+                            var myChart = echarts.init(document.getElementById('chartmain_bing'));
+                            // 使用刚指定的配置项和数据显示图表。
+                            myChart.setOption(option);
+                        })
+                    })
+
+
+                </script>
+                <span class="border_bg_leftTop"></span>
+                <span class="border_bg_rightTop"></span>
+                <span class="border_bg_leftBottom"></span>
+                <span class="border_bg_rightBottom"></span>
+            </div>
+        </div>
+
+        <div class="rightMain_bottom">
+            <div class="rightMain_bottomIn">
+                <h3>用户列表</h3>
+                <div class="biaoge biaoge_list" style="width:100%; height:36vh">
+                    <div class="biaoge_listIn">
+                        <ul class="ul_title">
+                            <li>用户</li>
+                            <li>编号</li>
+                            <li>性别</li>
+                            <li>年龄</li>
+                            <li>运动</li>
+                        </ul>
+                        <div class="ul_list">
+                            <div class="ul_listIn">
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                                <ul class="ul_con">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <script>
+                    $(function () {
+                        $.ajax({
+                            url: "http://localhost:8091/stu/sportlist",
+                            xhrFields: {withCredentials: true},
+                            crossDomain: true,
+                            data: null,
+                            dataType: "json"
+                        }).done(function (a) {
+                            console.log(a)
+                            for (var k = 0; k < 12; k++) {
+                                for(var j=0;j<5;j++){
+                                    var ul = document.getElementsByClassName("ul_con")[k];
+                                    var li = document.createElement('li');
+                                    ul.appendChild(li)
+                                }
+
+                            }
+                            for (var i = 0; i < 12; i++) {
+                                $($(".ul_con li")[i * 5]).text(a[i].name)
+                                $($(".ul_con li")[i * 5 + 1]).text(a[i].id)
+                                $($(".ul_con li")[i * 5 + 2]).text(a[i].sex)
+                                $($(".ul_con li")[i * 5 + 3]).text(a[i].age)
+                                $($(".ul_con li")[i * 5 + 4]).text(a[i].sport)
+                            }
+                        })
+                    })
+                </script>
+                <span class="border_bg_leftTop"></span>
+                <span class="border_bg_rightTop"></span>
+                <span class="border_bg_leftBottom"></span>
+                <span class="border_bg_rightBottom"></span>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+<!--大屏-->
+<!--数字增长累加动画-->
+
+<script type="text/javascript">
+    $(".shu1").numScroll();
+    $(".shu2").numScroll();
+    $(".shu3").numScroll();
+    $(".shu4").numScroll();
+    $(".shu5").numScroll();
+    $(".shu6").numScroll();
+
+    /*$(".num2").numScroll({
+    time:5000
+  });*/
+</script>
+<!--大屏-->
+</body>
+</html>
