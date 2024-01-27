@@ -19,6 +19,7 @@ import SportSex from "@/components/Myspace/SportSex.vue";
 import SportType from "@/components/Myspace/SportType.vue";
 import SportTend from "@/components/Myspace/SportTend.vue";
 import SportLike from "@/components/Myspace/SportLike.vue";
+import HomeRecommend from "@/components/Home/HomeRecommend.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -34,6 +35,7 @@ const router = createRouter({
                 {path: 'HomeIntroduce', component: HomeIntroduce},
                 {path: 'HomeFlowers', component: HomeFlowers},
                 {path: 'HomeDogs', component: HomeDogs},
+                {path: 'HomeRecommend', component: HomeRecommend},
                 {path: 'MySpace', component: MySpace,children:[
                         {path: 'CountControl', component: CountControl},
                         {path: 'ImageUp', component: ImageUp},

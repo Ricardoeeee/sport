@@ -31,16 +31,16 @@
             <Icon type="md-paw"/>
             户外运动
           </MenuItem>
-          <MenuItem name="7" to="/HomeMain/HomeIntroduce">
-            <Icon type="ios-people"/>
-            关于我们
+          <MenuItem name="7" to="/HomeMain/HomeRecommend">
+            <Icon type="md-outlet" />
+            智能推荐
           </MenuItem>
         </Menu>
       </div>
       <router-view></router-view>
     </div>
-    
-  
+
+
 </template>
 
 <script>
