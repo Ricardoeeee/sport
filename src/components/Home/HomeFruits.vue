@@ -141,12 +141,12 @@ export default {
       show5: false,
 
       fruits: {
-        img0: require("@/assets/fruits/无氧运动.jpg"),
-        img1: require("@/assets/fruits/赛跑.jpg"),
-        img2: require("@/assets/fruits/举重.jpg"),
-        img3: require("@/assets/fruits/跳高.jpg"),
-        img4: require("@/assets/fruits/跳远.jpg"),
-        img5: require("@/assets/fruits/拔河.jpg"),
+        img0: require("@/assets/wuyang/无氧运动.jpg"),
+        img1: require("@/assets/wuyang/赛跑.jpg"),
+        img2: require("@/assets/wuyang/举重.jpg"),
+        img3: require("@/assets/wuyang/跳高.jpg"),
+        img4: require("@/assets/wuyang/跳远.jpg"),
+        img5: require("@/assets/wuyang/拔河.jpg"),
       },
       data1:"",
       data2:"",

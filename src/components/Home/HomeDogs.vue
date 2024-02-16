@@ -146,12 +146,12 @@ export default {
       show4: false,
       show5: false,
       flowers: {
-        img0: require("@/assets/flowers/户外运动.jpg"),
-        img1: require("@/assets/flowers/登山.jpg"),
-        img2: require("@/assets/flowers/攀岩.jpg"),
-        img3: require("@/assets/flowers/露营.jpg"),
-        img4: require("@/assets/flowers/潜水.jpg"),
-        img5: require("@/assets/flowers/帆船.jpg"),
+        img0: require("@/assets/outdoor/户外运动.jpg"),
+        img1: require("@/assets/outdoor/登山.jpg"),
+        img2: require("@/assets/outdoor/攀岩.jpg"),
+        img3: require("@/assets/outdoor/露营.jpg"),
+        img4: require("@/assets/outdoor/潜水.jpg"),
+        img5: require("@/assets/outdoor/帆船.jpg"),
       },
       show:false,
     }
