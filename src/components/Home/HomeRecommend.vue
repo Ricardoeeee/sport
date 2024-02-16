@@ -103,6 +103,7 @@ export default {
 
   width: 62%;
   padding-top: 100px;
+  padding-bottom: 320px;
   font-size: 30px;
 }
 
